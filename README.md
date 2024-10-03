@@ -94,4 +94,25 @@ if (GUI.Button(new Rect(550, 625, 60, 60), "C", buttonStyle))
 如果用户按下C清零键，就代表着所有信息都要清零，所以分为两个部分实现：**清空文本框**和**清空算式**<br>
 其实这两步可以只用**一**步实现，只需要用**Clear**函数将存储算式的vec清空，根据vec来拼接字符串的equation也会被清空，因此文本框也会被清空
 ##### 计算
+```csharp
+if (GUI.Button(new Rect(860, 625, 60, 60), "=", buttonStyle))
+{
+    calculating();//计算算式
+}
+```
+计算是当用户按下**等于**符号（=）的时候才开始的，计算逻辑会单独封装在一个calculating函数中，因此=按钮只需要调用该函数就可以
 #### 计算逻辑
+```csharp
+var dataTable = new System.Data.DataTable();//创建一个用于进行数据处理的datatable类
+equation = Convert.ToString(dataTable.Compute(equation, string.Empty));//使用自带的Compute函数对传入表达式进行简单的计算，第二个条件是筛选条件为空
+char[] charArray = equation.ToCharArray();//将字符串拆分成单个字符
+vec.Clear();//清空算式
+foreach (char c in charArray)
+{
+    vec.Add((char)c);
+}
+```
+计算逻辑被封装在组件之一的**calculating**函数中，主要使用**Datatable**中的**Conpute**内置函数来计算简单的表达式<br>
+**Conpute**函数的参数有两个：equation是需要计算的具有**简单表达式格式**的字符串，第二个参数表示**筛选条件**，此处筛选条件为空就填入空字符串<br>
+由于计算之后会返回**Object**类型，因此要**转换成string**类型并赋值给equation<br>
+但由于equation本质上会在每一帧的OnGUI调用中**由vec中的字符拼接**而成，因此最终需要把equation中的每个字符**按顺序存储在vec**中，这样才能保证结果能够正确显示，于是要先将vec清空，然后将转换成字符数组的equation中的每个字符添加进去（具体实现如上代码）
