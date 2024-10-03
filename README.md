@@ -44,6 +44,22 @@ void OnGUI()
 * 第三个参数便是设置好的文本框格式
 ### 组件
 #### 状态初始化
+```csharp
+void Init()
+{
+    equation = string.Join("", vec);//将算式列表中的字符拼接成字符串
+
+    labelStyle = new GUIStyle(GUI.skin.label);// 创建一个文本框的style
+    labelStyle.fontSize = 20;// 设置字体大小
+    labelStyle.alignment = TextAnchor.MiddleRight;// 设置文本对齐方式为右对齐
+
+    buttonStyle = new GUIStyle(GUI.skin.button);// 创建一个按钮的style
+    buttonStyle.fontSize = 20;// 设置字体大小
+}
+```
+该函数是用来初始化的，会在运行一开始被Start函数以及OnGUI中被每帧调用，因此可以用来设置一些关于文本框或者按钮格式<br>
+第一行表示对equation的重计算，因为Init在OnGUI函数中会被每一帧都调用一次，因此可以保证**文本框中的信息实时更新**<br>
+关于文本框格式的设置可以详见代码中的注释
 #### 按钮逻辑
 ##### 数字符号
 ##### 退格
