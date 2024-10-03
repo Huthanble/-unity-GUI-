@@ -1,5 +1,4 @@
 # Unity_GUI_Calculate
-## 介绍
 3D游戏编程的第二次作业，使用unity的GUI实现一个简单的计算器,最终成果是一个可以使用的script<br><br>
 使用方法是将该script导入场景中的摄像头中（随意一个物件），点击开始就能看到屏幕上出现一个方框<br>
 ![计算器](image/calculator.png)
