@@ -8,48 +8,48 @@ using UnityEngine.Windows;
 
 public class calculator : MonoBehaviour
 {
-    private GUIStyle labelStyle;//ÎÄ±¾¿òÏÔÊ¾ÎÄ×ÖµÄ´óĞ¡ÓëÎ»ÖÃ
-    private GUIStyle buttonStyle;//°´Å¥ÉÏÎÄ×ÖµÄstyle
-    private List<char> vec=new List<char>();//´¢´æËãÊ½»ò½á¹ûµÄµØ·½
-    string equation = string.Empty;//Æ´½Ó³É×Ö·û´®µÄÊ½×Ó»ò½á¹û£¨ÓÃÓÚÏÔÊ¾£©
+    //ç¬¬ä¸€éƒ¨åˆ†ï¼šç³»ç»Ÿçš„å®ä¾‹åŠå…¶çŠ¶æ€å’Œæ¨¡å‹
+    private GUIStyle labelStyle;//æ–‡æœ¬æ¡†æ˜¾ç¤ºæ–‡å­—çš„å¤§å°ä¸ä½ç½®
+    private GUIStyle buttonStyle;//æŒ‰é’®ä¸Šæ–‡å­—çš„style
+    private List<char> vec=new List<char>();//å‚¨å­˜ç®—å¼æˆ–ç»“æœçš„åœ°æ–¹
+    string equation = string.Empty;//æ‹¼æ¥æˆå­—ç¬¦ä¸²çš„å¼å­æˆ–ç»“æœï¼ˆç”¨äºæ˜¾ç¤ºï¼‰
 
-    //µÚÒ»²¿·Ö£ºÏµÍ³×Ü¿Ø²¿·Ö
     void Start()
     {
         Init();
     }
 
-    //µÚ¶ş²¿·Ö£º½çÃæ³õÊ¼»¯GUI
+    //ç¬¬äºŒéƒ¨åˆ†ï¼šç•Œé¢åˆå§‹åŒ–GUI
     void OnGUI()
     {
-        Init();//½«Ä¬ÈÏµÄÅäÖÃ³õÊ¼»¯
-        GUI.Box(new Rect(500, 300, 445, 400),"¼ÆËãÆ÷");//·¶Î§ÊÇx500-945£¬y300-700
-        GUI.Label(new Rect(550, 325, 370, 60), equation, labelStyle);//³õÊ¼»¯ÓÃÓÚÏÔÊ¾¼ÆËãµÄÎÄ±¾¿ò£¬Ö®ºó¸ü¸ÄequationÖĞµÄÄÚÈİ£¬¾Í¿ÉÒÔ¸ü¸ÄÏÔÊ¾µÄÎÄ±¾
-        mybutton();//½øĞĞ°´Å¥µÄÏà¹ØÂß¼­
+        Init();//å°†é»˜è®¤çš„é…ç½®åˆå§‹åŒ–
+        GUI.Box(new Rect(500, 300, 445, 400),"è®¡ç®—å™¨");//èŒƒå›´æ˜¯x500-945ï¼Œy300-700
+        GUI.Label(new Rect(550, 325, 370, 60), equation, labelStyle);//åˆå§‹åŒ–ç”¨äºæ˜¾ç¤ºè®¡ç®—çš„æ–‡æœ¬æ¡†ï¼Œä¹‹åæ›´æ”¹equationä¸­çš„å†…å®¹ï¼Œå°±å¯ä»¥æ›´æ”¹æ˜¾ç¤ºçš„æ–‡æœ¬
+        mybutton();//è¿›è¡ŒæŒ‰é’®çš„ç›¸å…³é€»è¾‘
     }
 
-    //µÚÈı²¿·Ö£ºComponents
-    //³õÊ¼»¯
+    //ç¬¬ä¸‰éƒ¨åˆ†ï¼šComponents
+    //åˆå§‹åŒ–
     void Init()
     {
-        equation = string.Join("", vec);//½«ËãÊ½ÁĞ±íÖĞµÄ×Ö·ûÆ´½Ó³É×Ö·û´®
+        equation = string.Join("", vec);//å°†ç®—å¼åˆ—è¡¨ä¸­çš„å­—ç¬¦æ‹¼æ¥æˆå­—ç¬¦ä¸²
 
-        labelStyle = new GUIStyle(GUI.skin.label);// ´´½¨Ò»¸öÎÄ±¾¿òµÄstyle
-        labelStyle.fontSize = 20;// ÉèÖÃ×ÖÌå´óĞ¡
-        labelStyle.alignment = TextAnchor.MiddleRight;// ÉèÖÃÎÄ±¾¶ÔÆë·½Ê½ÎªÓÒ¶ÔÆë
+        labelStyle = new GUIStyle(GUI.skin.label);// åˆ›å»ºä¸€ä¸ªæ–‡æœ¬æ¡†çš„style
+        labelStyle.fontSize = 20;// è®¾ç½®å­—ä½“å¤§å°
+        labelStyle.alignment = TextAnchor.MiddleRight;// è®¾ç½®æ–‡æœ¬å¯¹é½æ–¹å¼ä¸ºå³å¯¹é½
 
-        buttonStyle = new GUIStyle(GUI.skin.button);// ´´½¨Ò»¸ö°´Å¥µÄstyle
-        buttonStyle.fontSize = 20;// ÉèÖÃ×ÖÌå´óĞ¡
+        buttonStyle = new GUIStyle(GUI.skin.button);// åˆ›å»ºä¸€ä¸ªæŒ‰é’®çš„style
+        buttonStyle.fontSize = 20;// è®¾ç½®å­—ä½“å¤§å°
     }
-    void mybutton()//³õÊ¼»¯ËùÓĞ°´Å¥,ÒÔ¼°±³ºóµÄĞĞÎªÂß¼­
+    void mybutton()//åˆå§‹åŒ–æ‰€æœ‰æŒ‰é’®,ä»¥åŠèƒŒåçš„è¡Œä¸ºé€»è¾‘
     {
         if (GUI.Button(new Rect(550, 400, 60, 60), "1", buttonStyle))
         {
-            vec.Add('1');//ÏñËãÊ½ÖĞÌí¼ÓÓÃ»§ÊäÈëµÄ×Ö·û
+            vec.Add('1');//åƒç®—å¼ä¸­æ·»åŠ ç”¨æˆ·è¾“å…¥çš„å­—ç¬¦
         }
         if (GUI.Button(new Rect(625, 400, 60, 60), "2", buttonStyle))
         {
-            vec.Add('2');//Âß¼­ÓëÉÏÃæÏàÍ¬£¬²»ÔÙ×¸Êö
+            vec.Add('2');//é€»è¾‘ä¸ä¸Šé¢ç›¸åŒï¼Œä¸å†èµ˜è¿°
         }
         if (GUI.Button(new Rect(700, 400, 60, 60), "3", buttonStyle))
         {
@@ -81,8 +81,7 @@ public class calculator : MonoBehaviour
         }
         if (GUI.Button(new Rect(550, 625, 60, 60), "C", buttonStyle))
         {
-            GUI.Label(new Rect(550, 325, 370, 60), "", labelStyle);//Çå¿ÕÎÄ±¾¿ò
-            vec.Clear();//Çå¿ÕËãÊ½
+            vec.Clear();//æ¸…ç©ºç®—å¼
         }
         if (GUI.Button(new Rect(625, 625, 60, 60), "0", buttonStyle))
         {
@@ -118,23 +117,23 @@ public class calculator : MonoBehaviour
         }
         if (GUI.Button(new Rect(785, 625, 60, 60), "<---", buttonStyle))
         {
-            if (vec.Count > 0)//ÅĞ¶Ï³¤¶È²»ÎªÁã
+            if (vec.Count > 0)//åˆ¤æ–­é•¿åº¦ä¸ä¸ºé›¶
             {
-                vec.RemoveAt(vec.Count-1);//½«vecÄ©Î²µÄ×Ö·ûÒÆ³ı
+                vec.RemoveAt(vec.Count-1);//å°†vecæœ«å°¾çš„å­—ç¬¦ç§»é™¤
             }
         }
         if (GUI.Button(new Rect(860, 625, 60, 60), "=", buttonStyle))
         {
-            calculating();//¼ÆËãËãÊ½
+            calculating();//è®¡ç®—ç®—å¼
         }
     }
-    //¼ÆËã½á¹û
+    //è®¡ç®—ç»“æœ
     void calculating()
     {
-        var dataTable = new System.Data.DataTable();//´´½¨Ò»¸öÓÃÓÚ½øĞĞÊı¾İ´¦ÀíµÄdatatableÀà
-        equation = Convert.ToString(dataTable.Compute(equation, string.Empty));//Ê¹ÓÃ×Ô´øµÄComputeº¯Êı¶Ô´«Èë±í´ïÊ½½øĞĞ¼òµ¥µÄ¼ÆËã£¬µÚ¶ş¸öÌõ¼şÊÇÉ¸Ñ¡Ìõ¼şÎª¿Õ
-        char[] charArray = equation.ToCharArray();//½«×Ö·û´®²ğ·Ö³Éµ¥¸ö×Ö·û
-        vec.Clear();//Çå¿ÕËãÊ½
+        var dataTable = new System.Data.DataTable();//åˆ›å»ºä¸€ä¸ªç”¨äºè¿›è¡Œæ•°æ®å¤„ç†çš„datatableç±»
+        equation = Convert.ToString(dataTable.Compute(equation, string.Empty));//ä½¿ç”¨è‡ªå¸¦çš„Computeå‡½æ•°å¯¹ä¼ å…¥è¡¨è¾¾å¼è¿›è¡Œç®€å•çš„è®¡ç®—ï¼Œç¬¬äºŒä¸ªæ¡ä»¶æ˜¯ç­›é€‰æ¡ä»¶ä¸ºç©º
+        char[] charArray = equation.ToCharArray();//å°†å­—ç¬¦ä¸²æ‹†åˆ†æˆå•ä¸ªå­—ç¬¦
+        vec.Clear();//æ¸…ç©ºç®—å¼
         foreach (char c in charArray)
         {
             vec.Add((char)c);
